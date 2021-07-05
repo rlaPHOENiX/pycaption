@@ -44,14 +44,9 @@ jobs:
         if: steps.tests.outcome == 'failure'
 
       - name: Slack notify tests PASSED
-        id: TestTest
         uses: archive/github-actions-slack@v2.0.0
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_TOKEN }}
           slack-channel: ${{ secrets.SLACK_CHANNEL_ID }}
           slack-text: ":rocket: Pycaption tests passed for Python ${{ matrix.python-version }}"
         if: steps.tests.outcome == 'success'
-      
-      - name: Send Slack Message Result
-        run: echo "${{ steps.TestTest.outputs.slack-result }}"
-        
